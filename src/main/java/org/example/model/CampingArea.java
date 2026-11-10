@@ -2,9 +2,6 @@ package org.example.model;
 
 import org.example.util.StringChecker;
 
-import org.example.data_structures.LinkedList;
-import java.util.Objects;
-
 public class CampingArea {
     private static int GLOBAL_AREA_COUNT = 0;
 
@@ -20,12 +17,12 @@ public class CampingArea {
         GLOBAL_AREA_COUNT += 1;
     }
 
-//
-// Getters and Setters
-//
-// Refuse updating a variable if the input is empty or null,
-// with the exception of `plots`.
-//
+/*
+    GETTERS AND SETTERS
+
+    Refuse updating a variable if the input is empty or null,
+    with the exception of `plots`.
+*/
 
     public String getAreaIdentifier() {
         return areaIdentifier;

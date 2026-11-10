@@ -1,5 +1,11 @@
 package org.example.managers;
 
-// CRUD
+import org.example.model.*;
+
 public class BookingService {
+    public BookingService(){}
+
+    public Booking book(CampingArea campingArea, Guest guest){
+        Plot plot
+    }
 }

@@ -13,11 +13,11 @@ public class ContactInformation {
         this.email = StringChecker.resolveIfNullOrEmpty(email, "No email provided.");
     }
 
-//
-// Getters and Setters
-//
-// Refuse updating a variable if the input is empty or null,
-//
+/*
+    GETTERS AND SETTERS
+
+    Refuse updating a variable if the input is empty or null,
+*/
 
     public String getAddress(){
         return address;

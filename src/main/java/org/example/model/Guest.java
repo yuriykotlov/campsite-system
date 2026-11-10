@@ -1,29 +1,27 @@
 package org.example.model;
 
+import org.example.util.StringChecker;
+
 import java.time.LocalDate;
 
 public class Guest {
-    private static int TOTAL_GUEST_COUNT = 0;
-
-    private int id = -1;
+    private final int id;
     private String name;
     private LocalDate dateOfBirth;
     private ContactInformation contactInformation;
 
-    public Guest(String name, LocalDate dateOfBirth, String address, String phoneNumber, String email){
-        TOTAL_GUEST_COUNT += 1;
-        id += TOTAL_GUEST_COUNT;
-
+    public Guest(int id, String name, LocalDate dateOfBirth, String address, String phoneNumber, String email){
+        this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.contactInformation = new ContactInformation(address, phoneNumber, email);
     }
 
-//
-// Getters and Setters
-//
-// Refuse updating a variable if the input is empty or null,
-//
+/*
+    GETTERS AND SETTERS
+
+    Refuse updating a variable if the input is empty or null,
+*/
 
     // There is no setter for id, only the getter.
     public int getId(){

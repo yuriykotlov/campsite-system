@@ -26,12 +26,12 @@ public class Preferences {
         this.budget = Math.max(budget, 0);
     }
 
-//
-// Getters and Setters
-//
-// Refuse updating a variable if the input is empty or null,
-// and if a passed parameter is less than 0, set it to 0.
-//
+/*
+    Getters and Setters
+
+    Refuse updating a variable if the input is empty or null,
+    and if a passed parameter is less than 0, set it to 0.
+*/
 
     public PlotType getType() {
         return type;

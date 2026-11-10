@@ -40,7 +40,13 @@ public class LinkedList<T> implements Iterable<T> {
         return node.data;
     }
 
-    // Finds and returns the first node that matches the supplied filter.
+    /*
+       Finds and returns the first node that matches the supplied filter.
+       Example:
+            filter = guest -> guest.getId() == id
+            filter.test(node.data), where node.data is now 'guest'
+            find returns Object T if the test returns true
+    */
     public T find(Predicate<T> filter) {
         for(Node<T> node = head; node != null; node = node.next){
             if(filter.test(node.data)) return node.data;
@@ -50,7 +56,7 @@ public class LinkedList<T> implements Iterable<T> {
 
     // Removes a node that has the item of type T.
     public boolean remove(T item) {
-        Objects.requireNonNull(item, "Cannot remove an item with type `null`.");
+        if(item == null) return false;
 
         // save a reference to the previous node when
         // removing the target node to link everything back up
@@ -93,12 +99,12 @@ public class LinkedList<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                T data = current.data;
-                current = current.next;
-
                 if(current == null){
                     throw new NoSuchElementException("There are no more elements in this linked list.");
                 }
+
+                T data = current.data;
+                current = current.next;
 
                 return data;
             }

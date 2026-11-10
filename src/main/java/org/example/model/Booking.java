@@ -9,6 +9,12 @@ public class Booking {
     private int guestId;
     private Preferences preferences;
 
+/*
+    Getters and Setters
+
+    Refuse updating a variable if the input is empty or null.
+*/
+
     public LocalDate getStartDate() {
         return startDate;
     }

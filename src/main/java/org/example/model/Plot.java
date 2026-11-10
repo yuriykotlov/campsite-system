@@ -23,12 +23,12 @@ public class Plot {
         this.hasPower = type == PlotType.STATIC_MOBILE_HOME;
     }
 
-//
-// Getters and Setters
-//
-// Refuse updating a variable if the input is empty or null,
-// and if a passed parameter is less than 0, set it to 0.
-//
+/*
+    Getters and Setters
+
+    Refuse updating a variable if the input is empty or null,
+    and if a passed parameter is less than 0, set it to 0.
+*/
 
     // No setters for variable `id`.
     public String getId() {
