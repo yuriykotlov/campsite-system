@@ -3,22 +3,23 @@ package org.example.model;
 import org.example.data_structures.LinkedList;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class Plot {
-    private final String id;
+    private final int id;
 
     private PlotType type;
     private boolean hasPower;
     private int bedroomCount;
     private int bedCount;
     private int sizeSqM;
-    private LinkedList<String> facilities;
+    private LinkedList<String> facilities = new LinkedList<>();
     private int costPerNight;
     private String photoURL;
 
-    public Plot(PlotType type){
-        this.id = UUID.randomUUID().toString();
+    LinkedList<Booking> plotBookings = new LinkedList<>();
+
+    public Plot(int id, PlotType type){
+        this.id = id;
         this.type = Objects.requireNonNullElse(type, PlotType.EMPTY);
         this.hasPower = type == PlotType.STATIC_MOBILE_HOME;
     }
@@ -31,7 +32,7 @@ public class Plot {
 */
 
     // No setters for variable `id`.
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -93,5 +94,17 @@ public class Plot {
     }
     public void setPhotoURL(String photoURL) {
         this.photoURL = Objects.requireNonNullElse(photoURL, "");
+    }
+
+    public LinkedList<Booking> getBookings() {
+        return plotBookings;
+    }
+    public void addBooking(Booking booking) {
+        if(booking != null){
+            plotBookings.add(booking);
+        }
+    }
+    public void removeBooking(Booking booking) {
+        plotBookings.remove(booking);
     }
 }

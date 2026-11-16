@@ -1,5 +1,6 @@
 package org.example.model;
 
+import org.example.data_structures.LinkedList;
 import org.example.util.StringChecker;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ public class Guest {
     private String name;
     private LocalDate dateOfBirth;
     private ContactInformation contactInformation;
+    private LinkedList<Booking> bookings = new LinkedList<>();
 
     public Guest(int id, String name, LocalDate dateOfBirth, String address, String phoneNumber, String email){
         this.id = id;
@@ -47,5 +49,17 @@ public class Guest {
     }
     public void setContactInformation(String address, String phoneNumber, String email){
         contactInformation = new ContactInformation(address, phoneNumber, email);
+    }
+
+    public LinkedList<Booking> getBookings(){
+        return bookings;
+    }
+    public void addBooking(Booking booking) {
+        if(booking != null){
+            bookings.add(booking);
+        }
+    }
+    public void removeBooking(Booking booking) {
+        bookings.remove(booking);
     }
 }

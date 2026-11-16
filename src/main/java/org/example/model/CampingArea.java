@@ -1,20 +1,21 @@
 package org.example.model;
 
+import org.example.data_structures.LinkedList;
 import org.example.util.StringChecker;
 
 public class CampingArea {
-    private static int GLOBAL_AREA_COUNT = 0;
+    private final int id;
 
     private String areaIdentifier;
     private String description;
-    private Plot plot;
 
-    public CampingArea(String areaIdentifier, String description, Plot plot){
-        this.areaIdentifier = StringChecker.resolveIfNullOrEmpty(areaIdentifier, "Camping Area " + GLOBAL_AREA_COUNT);
+    private LinkedList<Plot> plots = new LinkedList<>();
+    private int totalPlots = 0;
+
+    public CampingArea(int id, String areaIdentifier, String description){
+        this.id = id;
+        this.areaIdentifier = StringChecker.resolveIfNullOrEmpty(areaIdentifier, "Camping Area " + this.id);
         this.description = StringChecker.resolveIfNullOrEmpty(description, "No description");
-        this.plot = plot;
-
-        GLOBAL_AREA_COUNT += 1;
     }
 
 /*
@@ -23,6 +24,8 @@ public class CampingArea {
     Refuse updating a variable if the input is empty or null,
     with the exception of `plots`.
 */
+
+    public int getId(){ return id; }
 
     public String getAreaIdentifier() {
         return areaIdentifier;
@@ -42,10 +45,43 @@ public class CampingArea {
         }
     }
 
-    public Plot getPlot(){
+    public LinkedList<Plot> getPlots(){
+        return plots;
+    }
+
+/*
+    PLOT MANAGEMENT
+*/
+
+    public Plot addPlot(
+            PlotType type, boolean hasPower, int bedroomCount, int bedCount, int sizeSqM, LinkedList<String> facilities, int costPerNight, String photoURL
+    ){
+        Plot plot = new Plot(totalPlots + 1, type);
+        updatePlot(plot, type, hasPower, bedroomCount, bedCount, sizeSqM, facilities, costPerNight, photoURL);
+
+        totalPlots++;
+        plots.add(plot);
+
         return plot;
     }
-    public void setPlot(Plot plot){
-        this.plot = plot;
+
+    private void updatePlot(
+            Plot plot,
+            PlotType type, boolean hasPower, int bedroomCount, int bedCount, int sizeSqM, LinkedList<String> facilities, int costPerNight, String photoURL
+    ){
+        plot.setHasPower(hasPower);
+        plot.setBedroomCount(bedroomCount);
+        plot.setBedCount(bedCount);
+        plot.setSizeSqM(sizeSqM);
+        plot.setFacilities(facilities);
+        plot.setCostPerNight(costPerNight);
+        plot.setPhotoURL(photoURL);
     }
+
+    public Plot findPlot(int targetPlotId){
+        return plots.find(plot -> plot.getId() == targetPlotId);
+    }
+
+    public void removePlot(Plot plot){ plots.remove(plot); }
+    public void removePlot(int targetPlotId){ plots.remove(findPlot(targetPlotId)); }
 }

@@ -1,5 +1,7 @@
 package org.example.data_structures;
 
+import org.example.model.*;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;

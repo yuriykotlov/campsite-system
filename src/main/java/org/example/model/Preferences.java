@@ -49,7 +49,7 @@ public class Preferences {
         this.numberOfGuests = Math.max(numberOfGuests, 0);
     }
 
-    public boolean isHasPower() {
+    public boolean hasPower() {
         return hasPower;
     }
     public void setHasPower(boolean hasPower) {

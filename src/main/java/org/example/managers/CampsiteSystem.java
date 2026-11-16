@@ -7,8 +7,9 @@ import org.example.util.StringChecker;
 import java.time.LocalDate;
 
 public class CampsiteSystem {
-    private LinkedList<Campsite> campsites;
-    private LinkedList<Guest> guests;
+    private LinkedList<Campsite> campsites = new LinkedList<>();
+    private LinkedList<Guest> guests = new LinkedList<>();
+    private LinkedList<Booking> bookings = new LinkedList<>();
 
     // Used to supply an id to the campsites and guests
     private int totalCampsites = 0;

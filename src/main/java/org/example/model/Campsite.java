@@ -8,7 +8,8 @@ public class Campsite {
     private String name;
     private int stars;
     private ContactInformation contactInformation;
-    private LinkedList<CampingArea> campingAreas;
+    private LinkedList<CampingArea> campingAreas = new LinkedList<>();
+    private int totalCampingAreas = 0;
 
     public Campsite(int id, String name, int stars, String address, String phoneNumber, String email){
         this.id = id;
@@ -53,8 +54,39 @@ public class Campsite {
         return campingAreas;
     }
 
-    // no 'setter' for camping area, simply just add one at a time
-    public void addCampingArea(CampingArea campingArea){
-        campingAreas.add(campingArea);
+/*
+    CAMPING AREA MANAGEMENT
+*/
+
+    public CampingArea addCampingArea(String areaIdentifier, String description){
+        // Can't add two of the same campsites with the same identifier
+        if(findCampingArea(areaIdentifier) != null){
+            return null;
+        }
+
+        CampingArea area = new CampingArea(totalCampingAreas + 1, areaIdentifier, description);
+
+        totalCampingAreas++;
+        campingAreas.add(area);
+        return area;
     }
+
+    public CampingArea updateCampingArea(int targetAreaId, String areaIdentifier, String description){
+        CampingArea area = findCampingArea(targetAreaId);
+        if(area == null){ return null; }
+
+        area.setAreaIdentifier(areaIdentifier);
+        area.setDescription(description);
+        return area;
+    }
+
+    public CampingArea findCampingArea(int targetAreaId){
+        return campingAreas.find(area -> area.getId() == targetAreaId);
+    }
+
+    public CampingArea findCampingArea(String targetAreaIdentifier){
+        return campingAreas.find(area -> area.getAreaIdentifier().equalsIgnoreCase(targetAreaIdentifier));
+    }
+
+    public void removeCampingArea(int targetAreaId){ campingAreas.remove(findCampingArea(targetAreaId)); }
 }
