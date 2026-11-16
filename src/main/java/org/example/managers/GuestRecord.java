@@ -17,8 +17,6 @@ public class GuestRecord {
 
     public GuestRecord(Guest guest, LocalDate today){
         this.guest = guest;
-
-        for(Booking booking : guest)
     }
 
 }
