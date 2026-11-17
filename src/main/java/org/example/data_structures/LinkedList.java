@@ -10,7 +10,7 @@ import java.util.Objects;
 public class LinkedList<T> implements Iterable<T> {
     private Node<T> head;
     private Node<T> tail;
-    private int size;
+    private int size = 0;
 
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
@@ -96,7 +96,7 @@ public class LinkedList<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return current.next != null;
+                return current != null;
             }
 
             @Override

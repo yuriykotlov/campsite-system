@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.AppNavigation">
+   <top>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <buttons>
+            <Button fx:id="showMainButton" mnemonicParsing="false" onAction="#showMain" prefHeight="25.0" prefWidth="296.0" text="Main" />
+            <Button fx:id="showBrowseButton" mnemonicParsing="false" onAction="#showBrowse" text="Browse" />
+            <Button fx:id="showBookingButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showBooking" text="Booking" />
+            <Button fx:id="showGuestsButton" mnemonicParsing="false" onAction="#showGuests" text="Guests" />
+         </buttons>
+         <padding>
+            <Insets right="15.0" />
+         </padding>
+      </ButtonBar>
+   </top>
+</BorderPane>

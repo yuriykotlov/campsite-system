@@ -18,12 +18,17 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Main"), 1280, 720);
+        stage.setTitle("Campsite System");
         stage.setScene(scene);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    public static void setRoot(String fxml) {
+        try {
+            scene.setRoot(loadFXML(fxml));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't load FXML file " + fxml + ".fxml", e);
+        }
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

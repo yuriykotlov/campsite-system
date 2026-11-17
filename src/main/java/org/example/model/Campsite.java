@@ -10,12 +10,14 @@ public class Campsite {
     private ContactInformation contactInformation;
     private LinkedList<CampingArea> campingAreas = new LinkedList<>();
     private int totalCampingAreas = 0;
+    private LinkedList<String> facilities;
 
-    public Campsite(int id, String name, int stars, String address, String phoneNumber, String email){
+    public Campsite(int id, String name, int stars, String address, String phoneNumber, String email, LinkedList<String> facilities){
         this.id = id;
         this.name = StringChecker.resolveIfNullOrEmpty(name, "Campsite " + id);
         this.stars = Math.max(stars, 0);
         this.contactInformation = new ContactInformation(address, phoneNumber, email);
+        this.facilities = facilities;
     }
 
 /*
@@ -52,6 +54,13 @@ public class Campsite {
 
     public LinkedList<CampingArea> getCampingAreas(){
         return campingAreas;
+    }
+
+    public LinkedList<String> getFacilities(){
+        return facilities;
+    }
+    public void setFacilities(LinkedList<String> facilities){
+        this.facilities = facilities;
     }
 
 /*

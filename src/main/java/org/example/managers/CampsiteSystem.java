@@ -9,11 +9,11 @@ import java.time.LocalDate;
 public class CampsiteSystem {
     private LinkedList<Campsite> campsites = new LinkedList<>();
     private LinkedList<Guest> guests = new LinkedList<>();
-    private LinkedList<Booking> bookings = new LinkedList<>();
 
-    // Used to supply an id to the campsites and guests
+    // Used to supply an id to the campsites, guests and bookings
     private int totalCampsites = 0;
     private int totalGuests = 0;
+    private int totalBookings = 0;
 
 /*
     GETTERS
@@ -23,8 +23,23 @@ public class CampsiteSystem {
 
     public LinkedList<Campsite> getCampsites(){ return campsites; }
     public LinkedList<Guest> getGuests(){ return guests; }
+
     public int getTotalCampsites(){ return totalCampsites; }
     public int getTotalGuests(){ return totalGuests; }
+    public int getTotalBookings(){ return totalBookings; }
+
+    public int getNextCampsiteId(){
+        totalCampsites++;
+        return totalCampsites;
+    }
+    public int getNextGuestId(){
+        totalGuests++;
+        return totalGuests;
+    }
+    public int getNextBookingId(){
+        totalBookings++;
+        return totalBookings;
+    }
 
 /*
     CRUD
@@ -34,12 +49,13 @@ public class CampsiteSystem {
 
     /* CAMPSITE CRUD */
 
-    public Campsite addCampsite(String name, int stars, String address, String phoneNumber, String email){
+    public Campsite addCampsite(String name, int stars, String address, String phoneNumber, String email, LinkedList<String> facilities){
         totalCampsites++;
-        campsites.add(
-                new Campsite(totalCampsites, name, stars, address, phoneNumber, email)
-        );
-        return campsites.get(campsites.size());
+
+        Campsite campsite = new Campsite(totalCampsites, name, stars, address, phoneNumber, email, facilities);
+        campsites.add(campsite);
+
+        return campsite;
     }
     public Campsite findCampsite(int targetCampsiteId){
         return campsites.find(campsite -> campsite.getId() == targetCampsiteId);
@@ -67,10 +83,11 @@ public class CampsiteSystem {
 
     public Guest addGuest(String name, LocalDate dateOfBirth, String address, String phoneNumber, String email){
         totalGuests++;
-        guests.add(
-                new Guest(totalGuests, name, dateOfBirth, address, phoneNumber, email)
-        );
-        return guests.get(guests.size());
+
+        Guest guest = new Guest(totalGuests, name, dateOfBirth, address, phoneNumber, email);
+        guests.add(guest);
+
+        return guest;
     }
     public Guest findGuest(int targetGuestId){
         return guests.find(guest -> guest.getId() == targetGuestId);
@@ -93,4 +110,27 @@ public class CampsiteSystem {
     }
 
     public void removeGuest(int targetGuestId){ guests.remove(findGuest(targetGuestId)); }
+
+    /*
+        SAVING FUNCTIONALITY
+    */
+
+    // Reset: empties everything and restarts the ID counters.
+    public void clear(){
+        campsites.clear();          // or remove items one by one if your list has no clear()
+        guests.clear();
+        totalCampsites = 0;
+        totalGuests = 0;
+        totalBookings = 0;
+    }
+
+    // Load: copies another system's data into this one.
+    public void replaceWith(CampsiteSystem other){
+        clear();
+        for(Campsite campsite : other.campsites){ campsites.add(campsite); }
+        for(Guest guest : other.guests){ guests.add(guest); }
+        totalCampsites = other.totalCampsites;
+        totalGuests = other.totalGuests;
+        totalBookings = other.totalBookings;
+    }
 }

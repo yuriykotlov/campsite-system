@@ -3,30 +3,32 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.AppMain">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.AppMain">
+   <top>
+      <fx:include source="NavigationBar.fxml"/>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="campsiteCountLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="355.0" text="Campsite Count:" />
+            <Label fx:id="plotCountLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="355.0" text="Plot Count:" />
+            <Label fx:id="guestCountLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="355.0" text="Guest Count:" />
+            <Label fx:id="pendingBookingsLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="355.0" text="Bookings Count:" />
+            <Label fx:id="pendingBookingsCostLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="233.0" prefHeight="63.0" prefWidth="355.0" text="Total Bookings Cost:" />
+         </children>
+      </VBox>
+   </center>
    <bottom>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <buttons>
-            <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="296.0" text="Save" />
-            <Button fx:id="loadButton" mnemonicParsing="false" text="Load" />
-          <Button fx:id="resetDataButton" contentDisplay="CENTER" mnemonicParsing="false" text="Reset Data" translateX="-5.0" />
-        </buttons>
+         <buttons>
+            <Button fx:id="saveDataButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="296.0" text="Save" />
+            <Button fx:id="loadDataButton" mnemonicParsing="false" text="Load" />
+            <Button fx:id="resetDataButton" contentDisplay="CENTER" mnemonicParsing="false" text="Reset Data" translateX="-5.0" />
+         </buttons>
       </ButtonBar>
    </bottom>
-   <top>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <buttons>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="296.0" text="Main" />
-            <Button mnemonicParsing="false" text="Browse" />
-            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Booking" />
-            <Button mnemonicParsing="false" text="Guests" />
-         </buttons>
-         <padding>
-            <Insets right="15.0" />
-         </padding>
-      </ButtonBar>
-   </top>
 </BorderPane>

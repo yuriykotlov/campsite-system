@@ -86,7 +86,7 @@ public class Booking {
         return ChronoUnit.DAYS.between(startDate, endDate);
     }
 
-    public double getTotalBookedCost() {
-        return (double)(getTotalNightsBooked() * plot.getCostPerNight());
+    public int getTotalBookedCost() {
+        return (int)(getTotalNightsBooked() * plot.getCostPerNight());
     }
 }

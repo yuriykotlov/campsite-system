@@ -27,6 +27,9 @@ public class BookingService {
         if(startDate.isAfter(endDate)){
             throw new IllegalArgumentException("startDate cannot be after endDate");
         }
+        if(!endDate.isAfter(startDate)){
+            throw new IllegalArgumentException("0-night stays cannot exist");
+        }
     }
 
     private LinkedList<Plot> findPreferredPlots(
@@ -45,11 +48,11 @@ public class BookingService {
 
     private boolean doPreferencesMatch(Plot plot, Preferences preferences, LocalDate startDate, LocalDate endDate){
         if(preferences.getType() != null && preferences.getType() != plot.getType()) return false;
-        if(preferences.getNumberOfGuests() >= 1 && preferences.getNumberOfGuests() < plot.getBedCount()) return false;
-        if(preferences.hasPower() != plot.hasPower()) return false;
-        if(preferences.getMinSizeSqM() >= 1 && preferences.getMinSizeSqM() < plot.getSizeSqM()) return false;
-        if(preferences.getMinBedrooms() >= 1 && preferences.getMinBedrooms() < plot.getBedroomCount()) return false;
-        if(preferences.getBudget() >= 0 &&
+        if(preferences.getNumberOfGuests() >= 1 && preferences.getNumberOfGuests() > plot.getBedCount()) return false;
+        if(preferences.hasPower() && !plot.hasPower()) return false;
+        if(preferences.getMinSizeSqM() >= 1 && preferences.getMinSizeSqM() > plot.getSizeSqM()) return false;
+        if(preferences.getMinBedrooms() >= 1 && preferences.getMinBedrooms() > plot.getBedroomCount()) return false;
+        if(preferences.getBudget() > 0 &&
                 preferences.getBudget() < (double)(plot.getCostPerNight() * ChronoUnit.DAYS.between(startDate, endDate))
         ) return false;
         return true;
@@ -71,13 +74,29 @@ public class BookingService {
     // Create a booking. The plot supplied would be found with the method `findPreferredPlots()`
     public Booking createBooking(
             int id, Guest guest,
-            LocalDate startDate, LocalDate endDate, CampingArea campingArea, Plot plot, Preferences preferences
+            LocalDate startDate, LocalDate endDate, CampingArea campingArea, Preferences preferences
     ){
         areDatesValid(startDate, endDate);
 
-        return new Booking(
-                id, guest, startDate, endDate, campingArea, plot, preferences
+        LinkedList<Plot> matchedPlots = findPreferredPlots(campingArea, preferences, startDate, endDate);
+        if(matchedPlots.isEmpty()) return null;
+
+        Plot cheapestPlot = null;
+        for(Plot plot : matchedPlots){
+            if(cheapestPlot == null || plot.getCostPerNight() < cheapestPlot.getCostPerNight()){
+                cheapestPlot = plot;
+            }
+        }
+        if(cheapestPlot == null) return null;
+
+        Booking newBooking = new Booking(
+                id, guest, startDate, endDate, campingArea, cheapestPlot, preferences
         );
+
+        guest.addBooking(newBooking);
+        cheapestPlot.addBooking(newBooking);
+
+        return newBooking;
     }
 
     public void cancelBooking(Booking booking){
@@ -98,7 +117,7 @@ public class BookingService {
         for(Campsite campsite : campsiteSystem.getCampsites()){
             for(CampingArea campingArea : campsite.getCampingAreas()){
                 for(Plot plot : campingArea.getPlots()){
-                    for(Booking booking : pendingBookings(plot)){
+                    for(Booking booking : getPendingBookings(plot)){
                         bookings.add(booking);
                     }
                 }
@@ -109,12 +128,12 @@ public class BookingService {
     }
 
     // Get all pending bookings in a certain campsite
-    public LinkedList<Booking> pendingBookings(Campsite campsite){
+    public LinkedList<Booking> getPendingBookings(Campsite campsite){
         LinkedList<Booking> bookings = new LinkedList<>();
 
         for(CampingArea campingArea : campsite.getCampingAreas()){
             for(Plot plot : campingArea.getPlots()){
-                for(Booking booking : pendingBookings(plot)){
+                for(Booking booking : getPendingBookings(plot)){
                     bookings.add(booking);
                 }
             }
@@ -124,7 +143,7 @@ public class BookingService {
     }
 
     // Get a list of all pending bookings in a certain plot
-    public LinkedList<Booking> pendingBookings(Plot plot){
+    public LinkedList<Booking> getPendingBookings(Plot plot){
         LinkedList<Booking> bookings = new LinkedList<>();
 
         for(Booking booking : plot.getBookings()){
@@ -143,14 +162,14 @@ public class BookingService {
         for(Campsite campsite : campsiteSystem.getCampsites()){
             for(CampingArea campingArea : campsite.getCampingAreas()){
                 for(Plot plot : campingArea.getPlots()){
-                    for(Booking booking : plot.getBookings()){
+                    for(Booking booking : sortBookingsByStartDate(plot.getBookings())){
                         bookings.add(booking);
                     }
                 }
             }
         }
 
-        return sortBookingsByStartDate(bookings);
+        return bookings;
     }
 
     // Get a list all bookings in a target campsite
@@ -159,13 +178,13 @@ public class BookingService {
 
         for(CampingArea campingArea : campsite.getCampingAreas()){
             for(Plot plot : campingArea.getPlots()){
-                for(Booking booking : plot.getBookings()){
+                for(Booking booking : sortBookingsByStartDate(plot.getBookings())){
                     bookings.add(booking);
                 }
             }
         }
 
-        return sortBookingsByStartDate(bookings);
+        return bookings;
     }
 
     // Get a list of all bookings made by a certain guest
@@ -204,5 +223,19 @@ public class BookingService {
         }
 
         return sortedList;
+    }
+
+    /*
+        STATIC HELPERS
+    */
+
+    /* COUNTING */
+
+    public static int getTotalBookingsCost(LinkedList<Booking> bookings){
+        int total = 0;
+        for(Booking booking : bookings){
+            total += booking.getTotalBookedCost();
+        }
+        return total;
     }
 }
