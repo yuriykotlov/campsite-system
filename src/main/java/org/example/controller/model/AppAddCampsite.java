@@ -1,14 +1,13 @@
-package org.example.controller;
+package org.example.controller.model;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import javafx.stage.Stage;
 import org.example.App;
 import org.example.AppState;
-import org.example.data_structures.LinkedList;
+import org.example.data_structures.*;
 import org.example.managers.*;
 import org.example.model.*;
 import org.example.util.StringChecker;

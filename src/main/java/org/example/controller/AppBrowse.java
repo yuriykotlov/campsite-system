@@ -5,7 +5,7 @@ import javafx.scene.control.*;
 
 import org.example.App;
 import org.example.AppState;
-import org.example.data_structures.*;
+import org.example.controller.model.*;
 import org.example.managers.*;
 import org.example.model.*;
 
@@ -88,13 +88,15 @@ public class AppBrowse {
         } else if(item instanceof Plot){
             Plot plot = (Plot)item;
             addChildButton.setText("Add Booking");
-            detailsTitle.setText("Plot Id: " + plot.getId());
+            detailsTitle.setText(plot.getIdentifier() + " - " + plot.getType());
             detailsText.setText(
-                            "Type: " + plot.getType()
-                            + "\nHas Power: " + (plot.hasPower() ? "Yes" : "No")
-                            + "\nBedrooms: " + plot.getBedroomCount() + ", Beds: " + plot.getBedCount()
+                            "Id: " + plot.getId()
+                            + "\nType: " + plot.getType()
+                            + "\n" + (plot.hasPower() ? "Has Power" : "Doesn't have Power")
+                            + "\nBedrooms: " + plot.getBedroomCount()
+                            + "\nBeds: " + plot.getBedCount()
                             + "\nSize: " + plot.getSizeSqM() + " Metres Squared"
-                            + "\nCost per night: " + plot.getCostPerNight() + " euro"
+                            + "\nCost per night: " + plot.getCostPerNight() + " euros"
                             + "\nPending bookings: " + bookingService.getPendingBookings(plot).size()
             );
 
@@ -127,6 +129,7 @@ public class AppBrowse {
 
         for(Campsite campsite : campsiteSystem.getCampsites()){
             TreeItem<Object> campsiteItem = new TreeItem<>(campsite);
+            campsiteItem.setExpanded(true);
 
             for(CampingArea campingArea : campsite.getCampingAreas()){
                 TreeItem<Object> areaItem = new TreeItem<>(campingArea);
@@ -157,7 +160,7 @@ public class AppBrowse {
         }
         if(item instanceof Plot){
             Plot plot = (Plot)item;
-            return plot.getId() + " – " + plot.getType();
+            return plot.getIdentifier() + " (" + plot.getType() + ")";
         }
         if(item instanceof Booking){
             Booking booking = (Booking)item;
@@ -176,13 +179,30 @@ public class AppBrowse {
 
     private void addChild(){
         Object item = selected();
+
+        if(item instanceof Campsite){
+            AppAddCampingArea.open((Campsite)item, null);
+
+        } else if(item instanceof CampingArea){
+            AppAddPlot.open((CampingArea)item, null);
+        }
     }
 
     private void editSelected(){
         Object item = selected();
 
-        AppAddCampsite.setCampsiteBeingEdited((Campsite)item);
-        App.setRoot("AddCampsite");
+        if(item instanceof Campsite){
+            AppAddCampsite.setCampsiteBeingEdited((Campsite)item);
+            App.setRoot("AddCampsite");
+
+        } else if(item instanceof CampingArea){
+            CampingArea campingArea = (CampingArea)item;
+            AppAddCampingArea.open(findCampsiteOf(campingArea), campingArea);
+
+        } else if(item instanceof Plot){
+            Plot plot = (Plot)item;
+            AppAddPlot.open(findCampingAreaOf(plot), plot);
+        }
     }
 
     private void removeSelected(){
@@ -199,7 +219,7 @@ public class AppBrowse {
                 bookingService.cancelBooking(booking);
             }
 
-            CampingArea campingArea = findAreaOf(plot);
+            CampingArea campingArea = findCampingAreaOf(plot);
             campingArea.removePlot(plot);
 
         } else if(item instanceof CampingArea){
@@ -253,7 +273,7 @@ public class AppBrowse {
         return new Alert(Alert.AlertType.CONFIRMATION, message).showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK;
     }
 
-    private CampingArea findAreaOf(Plot plot){
+    private CampingArea findCampingAreaOf(Plot plot){
         return (CampingArea) tree.getSelectionModel().getSelectedItem().getParent().getValue();
     }
 

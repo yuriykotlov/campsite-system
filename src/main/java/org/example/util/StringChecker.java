@@ -2,7 +2,7 @@ package org.example.util;
 
 import org.example.data_structures.LinkedList;
 
-public final class StringChecker {
+public class StringChecker {
     private StringChecker(){
         throw new UnsupportedOperationException("Cannot construct a utility class (StringChecker).");
     }

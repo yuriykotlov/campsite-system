@@ -54,10 +54,9 @@ public class CampingArea {
 */
 
     public Plot addPlot(
-            PlotType type, boolean hasPower, int bedroomCount, int bedCount, int sizeSqM, LinkedList<String> facilities, int costPerNight, String photoURL
+            String identifier, PlotType type, boolean hasPower, int bedroomCount, int bedCount, int sizeSqM, LinkedList<String> facilities, int costPerNight, String photoURL
     ){
-        Plot plot = new Plot(totalPlots + 1, type);
-        updatePlot(plot, type, hasPower, bedroomCount, bedCount, sizeSqM, facilities, costPerNight, photoURL);
+        Plot plot = new Plot(totalPlots + 1, identifier, type, hasPower, bedroomCount, bedCount, sizeSqM, facilities, costPerNight, photoURL);
 
         totalPlots++;
         plots.add(plot);
@@ -65,10 +64,12 @@ public class CampingArea {
         return plot;
     }
 
-    private void updatePlot(
+    public Plot updatePlot(
             Plot plot,
-            PlotType type, boolean hasPower, int bedroomCount, int bedCount, int sizeSqM, LinkedList<String> facilities, int costPerNight, String photoURL
+            String identifier, PlotType type, boolean hasPower, int bedroomCount, int bedCount, int sizeSqM, LinkedList<String> facilities, int costPerNight, String photoURL
     ){
+        plot.setIdentifier(identifier);
+        plot.setType(type);
         plot.setHasPower(hasPower);
         plot.setBedroomCount(bedroomCount);
         plot.setBedCount(bedCount);
@@ -76,6 +77,8 @@ public class CampingArea {
         plot.setFacilities(facilities);
         plot.setCostPerNight(costPerNight);
         plot.setPhotoURL(photoURL);
+
+        return plot;
     }
 
     public Plot findPlot(int targetPlotId){

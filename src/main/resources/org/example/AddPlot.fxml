@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.model.AppAddPlot">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="titleLabel" alignment="CENTER" prefHeight="48.0" prefWidth="635.0" text="Plot Title">
+                     <padding>
+                        <Insets right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="48.0" prefWidth="149.0" text="Identifier (Name):">
+                     <padding>
+                        <Insets right="15.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="identifierField" prefHeight="55.0" prefWidth="455.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <ComboBox fx:id="plotTypeComboBox" prefHeight="37.0" prefWidth="178.0">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <CheckBox fx:id="hasPowerCheckBox" mnemonicParsing="false" text="Has Power">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </CheckBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="130.0" text="Bedroom Count" />
+                        <Spinner fx:id="bedroomCountSpinner" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="130.0" text="Bed Count" />
+                        <Spinner fx:id="bedCountSpinner" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="285.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="48.0" prefWidth="149.0" text="Size (Square Metres):">
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="sizeSqMField" prefHeight="39.0" prefWidth="138.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="285.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="48.0" prefWidth="149.0" text="Cost Per Night:">
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="costPerNightField" prefHeight="39.0" prefWidth="138.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="48.0" prefWidth="149.0" text="Facilities:">
+                     <padding>
+                        <Insets right="15.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="facilitiesField" prefHeight="38.0" prefWidth="453.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="48.0" prefWidth="149.0" text="Photo URL:">
+                     <padding>
+                        <Insets right="15.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="photoURLField" prefHeight="38.0" prefWidth="453.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="warningLabel" alignment="CENTER" prefHeight="70.0" prefWidth="275.0" wrapText="true" />
+            <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="71.0" prefWidth="119.0" text="Save" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="71.0" prefWidth="119.0" text="Cancel" />
+         </children>
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

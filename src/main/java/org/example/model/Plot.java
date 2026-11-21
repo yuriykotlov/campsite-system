@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Plot {
     private final int id;
 
+    private String identifier;
     private PlotType type;
     private boolean hasPower;
     private int bedroomCount;
@@ -18,10 +19,23 @@ public class Plot {
 
     LinkedList<Booking> plotBookings = new LinkedList<>();
 
-    public Plot(int id, PlotType type){
+    public Plot(
+            int id, String identifier, PlotType type,
+            boolean hasPower, int bedroomCount, int bedCount, int sizeSqM, LinkedList<String> facilities, int costPerNight, String photoURL
+    ){
         this.id = id;
+        this.identifier = identifier;
         this.type = Objects.requireNonNullElse(type, PlotType.EMPTY);
         this.hasPower = type == PlotType.STATIC_MOBILE_HOME;
+
+        // Optional
+        this.hasPower = hasPower;
+        this.bedroomCount = bedroomCount;
+        this.bedCount = bedCount;
+        this.sizeSqM = sizeSqM;
+        this.facilities = facilities;
+        this.costPerNight = costPerNight;
+        this.photoURL = photoURL;
     }
 
 /*
@@ -35,6 +49,9 @@ public class Plot {
     public int getId() {
         return id;
     }
+
+    public String getIdentifier(){ return identifier; }
+    public void setIdentifier(String identifier){ this.identifier = identifier; }
 
     public PlotType getType() {
         return type;
