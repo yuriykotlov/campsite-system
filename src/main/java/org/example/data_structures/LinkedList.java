@@ -2,12 +2,13 @@ package org.example.data_structures;
 
 import org.example.model.*;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.Objects;
 
-public class LinkedList<T> implements Iterable<T> {
+public class LinkedList<T> implements Iterable<T>, Serializable {
     private Node<T> head;
     private Node<T> tail;
     private int size = 0;

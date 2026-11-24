@@ -3,9 +3,10 @@ package org.example.model;
 import org.example.data_structures.LinkedList;
 import org.example.util.StringChecker;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Guest {
+public class Guest  implements Serializable {
     private final int id;
     private String name;
     private LocalDate dateOfBirth;

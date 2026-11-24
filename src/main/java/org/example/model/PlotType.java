@@ -1,6 +1,8 @@
 package org.example.model;
 
-public enum PlotType {
+import java.io.Serializable;
+
+public enum PlotType implements Serializable {
     EMPTY,
     STATIC_MOBILE_HOME,
     BUNGALOW,

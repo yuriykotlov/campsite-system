@@ -1,9 +1,10 @@
 package org.example.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Booking {
+public class Booking  implements Serializable {
     private final int id;
     private final Guest guest;
 

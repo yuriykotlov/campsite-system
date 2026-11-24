@@ -10,6 +10,7 @@ import org.example.data_structures.*;
 import org.example.managers.*;
 import org.example.model.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class AppMain {
@@ -57,16 +58,33 @@ public class AppMain {
 
     @FXML
     private void saveData(){
-        System.out.println("save");
+        try{
+            DataPersistence.saveCampsiteSystem(campsiteSystem);
+            System.out.println("save");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     private void loadData(){
-        System.out.println("load");
+        try{
+            campsiteSystem.load(DataPersistence.loadCampsiteSystem());
+            System.out.println("load");
+
+            // update summary since new values have been loaded in
+            showSummary();
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    // Clear current data but don't reset the save itself
     @FXML
     private void resetData(){
+        campsiteSystem.clear();
+        showSummary();
         System.out.println("reset data");
     }
 }

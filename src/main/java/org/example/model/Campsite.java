@@ -3,7 +3,9 @@ package org.example.model;
 import org.example.data_structures.LinkedList;
 import org.example.util.StringChecker;
 
-public class Campsite {
+import java.io.Serializable;
+
+public class Campsite  implements Serializable {
     private final int id;
     private String name;
     private int stars;

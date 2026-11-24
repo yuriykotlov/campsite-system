@@ -2,7 +2,9 @@ package org.example.model;
 
 import org.example.util.StringChecker;
 
-public class ContactInformation {
+import java.io.Serializable;
+
+public class ContactInformation  implements Serializable {
     String address;
     String phoneNumber;
     String email;

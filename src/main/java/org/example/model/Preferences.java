@@ -1,13 +1,15 @@
 package org.example.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Preferences {
+public class Preferences implements Serializable {
     private PlotType type;
     private int numberOfGuests;
     private boolean hasPower;
     private int minSizeSqM;
     private int minBedrooms;
+    private int minBeds;
     private int budget;
 
     public Preferences(
@@ -16,6 +18,7 @@ public class Preferences {
             boolean hasPower,
             int minSizeSqM,
             int minBedrooms,
+            int minBeds,
             int budget
     ){
         this.type = Objects.requireNonNullElse(type, PlotType.EMPTY);
@@ -23,6 +26,7 @@ public class Preferences {
         this.hasPower = hasPower;
         this.minSizeSqM = Math.max(minSizeSqM, 0);
         this.minBedrooms = Math.max(minBedrooms, 0);
+        this.minBeds = Math.max(minBeds, 0);
         this.budget = Math.max(budget, 0);
     }
 
@@ -68,6 +72,13 @@ public class Preferences {
     }
     public void setMinBedrooms(int minBedrooms) {
         this.minBedrooms = Math.max(minBedrooms, 0);
+    }
+
+    public int getMinBeds() {
+        return minBeds;
+    }
+    public void setMinBeds(int minBeds) {
+        this.minBeds = Math.max(minBeds, 0);
     }
 
     public int getBudget() {

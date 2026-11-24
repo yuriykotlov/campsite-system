@@ -1,6 +1,8 @@
 package org.example.data_structures;
 
-public class Node<T> {
+import java.io.Serializable;
+
+public class Node<T> implements Serializable {
     T data = null;
     Node<T> next = null;
 

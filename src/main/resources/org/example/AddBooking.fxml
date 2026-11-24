@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.model.AppAddBooking">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="titleLabel" alignment="CENTER" prefHeight="48.0" prefWidth="600.0" text="Booking Title">
+                     <padding>
+                        <Insets right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="48.0" prefWidth="600.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="37.0" prefWidth="50.0" text="Guest:" textAlignment="CENTER" wrapText="true" />
+                        <ComboBox fx:id="guestComboBox" prefHeight="25.0" prefWidth="128.0">
+                           <opaqueInsets>
+                              <Insets right="15.0" />
+                           </opaqueInsets>
+                        </ComboBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" right="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="79.0" text="Start Date:" textAlignment="RIGHT" wrapText="true" />
+                        <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="108.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" text="End Date:" textAlignment="RIGHT" wrapText="true">
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </Label>
+                        <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="108.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="48.0" prefWidth="600.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="37.0" prefWidth="71.0" text="Guests Count:" textAlignment="CENTER" wrapText="true" />
+                        <Spinner fx:id="guestCountSpinner" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" right="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="79.0" text="Plot Type:" textAlignment="RIGHT" wrapText="true" />
+                        <ComboBox fx:id="plotTypeComboBox" prefWidth="150.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                     <children>
+                        <CheckBox fx:id="hasPowerCheckBox" mnemonicParsing="false" text="Has Power" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="48.0" prefWidth="600.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="37.0" prefWidth="51.0" text="Min SqM:" textAlignment="CENTER" wrapText="true" />
+                        <Spinner fx:id="minSqMSpinner" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" right="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="69.0" text="Min Bedrooms:" textAlignment="CENTER" wrapText="true" />
+                        <Spinner fx:id="minBedroomsSpinner" prefHeight="25.0" prefWidth="100.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" right="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="199.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="69.0" text="Min Beds:" textAlignment="CENTER" wrapText="true" />
+                        <Spinner fx:id="minBedsSpinner" prefHeight="25.0" prefWidth="100.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" right="15.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="48.0" prefWidth="600.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="284.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="37.0" prefWidth="84.0" text="Min Budget (0 for none):" textAlignment="CENTER" wrapText="true" />
+                        <Spinner fx:id="minBudgetSpinner" prefHeight="25.0" prefWidth="127.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" right="15.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="warningLabel" alignment="CENTER" prefHeight="70.0" prefWidth="275.0" wrapText="true" />
+            <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="71.0" prefWidth="119.0" text="Save" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="71.0" prefWidth="119.0" text="Cancel" />
+         </children>
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

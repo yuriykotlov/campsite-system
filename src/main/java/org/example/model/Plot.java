@@ -2,9 +2,10 @@ package org.example.model;
 
 import org.example.data_structures.LinkedList;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Plot {
+public class Plot implements Serializable {
     private final int id;
 
     private String identifier;

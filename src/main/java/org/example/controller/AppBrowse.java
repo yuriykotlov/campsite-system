@@ -19,6 +19,7 @@ public class AppBrowse {
     @FXML private Button addChildButton;
     @FXML private Button editButton;
     @FXML private Button removeButton;
+    @FXML private Button findBookingButton;
 
     private final CampsiteSystem campsiteSystem = AppState.getSystem();
     private final BookingService bookingService = AppState.getBookingService();
@@ -44,6 +45,7 @@ public class AppBrowse {
         addChildButton.setOnAction(event -> addChild());
         editButton.setOnAction(event -> editSelected());
         removeButton.setOnAction(event -> removeSelected());
+        findBookingButton.setOnAction(event -> findBooking());
 
         buildTree();
         allowButtonUse(null);
@@ -52,8 +54,8 @@ public class AppBrowse {
     private void allowButtonUse(Object item){
         addChildButton.setDisable(!(item instanceof Campsite || item instanceof CampingArea || item instanceof Plot));
         editButton.setDisable(!(item instanceof Campsite || item instanceof CampingArea || item instanceof Plot));
-        removeButton.setDisable(!(item instanceof Campsite || item instanceof CampingArea
-                || item instanceof Plot || item instanceof Booking));
+        removeButton.setDisable(!(item instanceof Campsite || item instanceof CampingArea || item instanceof Plot || item instanceof Booking));
+        findBookingButton.setDisable(!(item instanceof CampingArea));
 
         if(item instanceof Campsite){
             Campsite campsite = (Campsite)item;
@@ -95,7 +97,7 @@ public class AppBrowse {
                             + "\n" + (plot.hasPower() ? "Has Power" : "Doesn't have Power")
                             + "\nBedrooms: " + plot.getBedroomCount()
                             + "\nBeds: " + plot.getBedCount()
-                            + "\nSize: " + plot.getSizeSqM() + " Metres Squared"
+                            + "\nSize: " + plot.getSizeSqM() + "m²"
                             + "\nCost per night: " + plot.getCostPerNight() + " euros"
                             + "\nPending bookings: " + bookingService.getPendingBookings(plot).size()
             );
@@ -185,6 +187,10 @@ public class AppBrowse {
 
         } else if(item instanceof CampingArea){
             AppAddPlot.open((CampingArea)item, null);
+
+        } else if(item instanceof Plot){
+            Plot plot = (Plot)item;
+            AppAddBooking.open(findCampingAreaOf(plot), plot);
         }
     }
 
@@ -237,6 +243,11 @@ public class AppBrowse {
 
         buildTree();
         allowButtonUse(null);
+    }
+
+    private void findBooking(){
+        Object item = selected();
+        if(item != null) AppAddBooking.open((CampingArea)item, null);
     }
 
     /*

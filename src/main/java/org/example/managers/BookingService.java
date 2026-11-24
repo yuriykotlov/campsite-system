@@ -71,9 +71,9 @@ public class BookingService {
         BOOKING MANAGEMENT
      */
 
-    // Create a booking. The plot supplied would be found with the method `findPreferredPlots()`
-    public Booking createBooking(
-            int id, Guest guest,
+    // Create a bookin and get the best matching plot with `findPreferredPlots()`
+    public Booking createBookingBestMatch(
+            Guest guest,
             LocalDate startDate, LocalDate endDate, CampingArea campingArea, Preferences preferences
     ){
         areDatesValid(startDate, endDate);
@@ -90,11 +90,31 @@ public class BookingService {
         if(cheapestPlot == null) return null;
 
         Booking newBooking = new Booking(
-                id, guest, startDate, endDate, campingArea, cheapestPlot, preferences
+                campsiteSystem.getNextBookingId(), guest, startDate, endDate, campingArea, cheapestPlot, preferences
         );
 
         guest.addBooking(newBooking);
         cheapestPlot.addBooking(newBooking);
+
+        return newBooking;
+    }
+
+    // Book a specific plot
+    public Booking createBookingSpecificPlot(
+            Guest guest,
+            LocalDate startDate, LocalDate endDate, CampingArea campingArea, Plot plot, Preferences preferences
+    ){
+        areDatesValid(startDate, endDate);
+
+        if(!doPreferencesMatch(plot, preferences, startDate, endDate)) return null;
+        if(!isPlotAvailable(plot, startDate, endDate)) return null;
+
+        Booking newBooking = new Booking(
+                campsiteSystem.getNextBookingId(), guest, startDate, endDate, campingArea, plot, preferences
+        );
+
+        guest.addBooking(newBooking);
+        plot.addBooking(newBooking);
 
         return newBooking;
     }

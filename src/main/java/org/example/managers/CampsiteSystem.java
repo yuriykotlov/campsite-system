@@ -4,9 +4,10 @@ import org.example.data_structures.LinkedList;
 import org.example.model.*;
 import org.example.util.StringChecker;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class CampsiteSystem {
+public class CampsiteSystem implements Serializable {
     private LinkedList<Campsite> campsites = new LinkedList<>();
     private LinkedList<Guest> guests = new LinkedList<>();
 
@@ -115,20 +116,22 @@ public class CampsiteSystem {
         SAVING FUNCTIONALITY
     */
 
-    // Reset: empties everything and restarts the ID counters.
     public void clear(){
-        campsites.clear();          // or remove items one by one if your list has no clear()
+        campsites.clear();
         guests.clear();
+
         totalCampsites = 0;
         totalGuests = 0;
         totalBookings = 0;
     }
 
-    // Load: copies another system's data into this one.
-    public void replaceWith(CampsiteSystem other){
+    // Load another CampsiteSystem
+    public void load(CampsiteSystem other){
         clear();
+
         for(Campsite campsite : other.campsites){ campsites.add(campsite); }
         for(Guest guest : other.guests){ guests.add(guest); }
+
         totalCampsites = other.totalCampsites;
         totalGuests = other.totalGuests;
         totalBookings = other.totalBookings;
